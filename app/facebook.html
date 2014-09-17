@@ -1,16 +1,11 @@
-'use strict';
-
-// Declare app level module which depends on views, and components
-angular.module('myApp', [
-  'ngRoute',
-  'myApp.view1',
-  'myApp.view2',
-  'myApp.version'
-]).
-config(['$routeProvider', function($routeProvider) {
-  $routeProvider.otherwise({redirectTo: '/view1'});
-}]);
-
+<!DOCTYPE html>
+<html>
+<head>
+<title>Facebook Login JavaScript Example</title>
+<meta charset="UTF-8">
+</head>
+<body>
+<script>
   // This is called with the results from from FB.getLoginStatus().
   function statusChangeCallback(response) {
     console.log('statusChangeCallback');
@@ -84,8 +79,24 @@ config(['$routeProvider', function($routeProvider) {
   function testAPI() {
     console.log('Welcome!  Fetching your information.... ');
     FB.api('/me?fields=id,name,gender', function(response) {
-      console.log('Successful login for: ' + response.name + ' gender='+response.gender + " birthday="+response.birthday);
+      console.log('Successful login for: ' + response.name + ' gender='+response.gender);
       document.getElementById('status').innerHTML =
-        'Thanks for logging in, ' + ' gender='+response.gender + " birthday="+response.birthday + response.name + '!';
+        'Thanks for logging in, ' + response.name + '!';
     });
   }
+</script>
+
+<!--
+  Below we include the Login Button social plugin. This button uses
+  the JavaScript SDK to present a graphical Login button that triggers
+  the FB.login() function when clicked.
+-->
+
+<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+</fb:login-button>
+
+<div id="status">
+</div>
+
+</body>
+</html>
