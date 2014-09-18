@@ -7,9 +7,30 @@ angular.module('myApp', [
   'myApp.view2',
   'myApp.version'
 ]).
-config(['$routeProvider', function($routeProvider) {
-  $routeProvider.otherwise({redirectTo: '/view1'});
-}]);
+controller('NamerController', ['$scope', function ($scope) {
+	$scope.birthDay = function(date){
+		var num = date.getDay();
+		console.log(num);
+		return num;
+	}
+}])
+
+window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1554126584816986',
+      status     : true,
+      xfbml      : true,
+      version    : 'v2.1'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
 
   // This is called with the results from from FB.getLoginStatus().
   function statusChangeCallback(response) {
@@ -89,3 +110,5 @@ config(['$routeProvider', function($routeProvider) {
         'Thanks for logging in, ' + ' gender='+response.gender + " birthday="+response.birthday + response.name + '!';
     });
   }
+
+
